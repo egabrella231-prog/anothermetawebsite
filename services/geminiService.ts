@@ -24,12 +24,11 @@ If asked about pricing, suggest they contact the sales team via the provided ema
 
 export const sendMessageToGemini = async (history: { role: string; parts: { text: string }[] }[], newMessage: string): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
+    if (!process.env.API_KEY) {
       return "I'm currently in demo mode without a brain connection (API Key missing). Please contact the admin.";
     }
 
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     // Map internal history format to Gemini API format if needed, 
     // but the chat helper usually manages history. 
