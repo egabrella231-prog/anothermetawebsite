@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   Menu, X, Phone, Mail, Globe, Cpu, Users, 
   Calendar, Mic, Zap, ArrowRight, MessageSquare, 
-  Bot, Layout, CheckCircle, Loader2
+  Bot, Layout, CheckCircle, Loader2, Play
 } from 'lucide-react';
 import { sendMessageToGemini } from './services/geminiService';
 
@@ -46,6 +46,53 @@ const ServiceCard: React.FC<{ title: string; description: string; icon: React.Re
     <p className="text-gray-600 leading-relaxed">{description}</p>
   </div>
 );
+
+const VideoShowcase: React.FC = () => {
+  return (
+    <section className="py-20 bg-gray-900 relative overflow-hidden">
+      {/* Ambient Background Effects */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 opacity-90 z-0"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-meta-orange/10 rounded-full blur-[120px] z-0"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 text-meta-orange text-sm font-semibold mb-4 border border-gray-700">
+            <Play size={14} className="fill-current" />
+            <span>Brand Showcase</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            Breaking Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-meta-orange to-meta-green">Barriers</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            Experience the power of transformation. We don't just build software; we shatter the glass ceiling of what's possible for your business.
+          </p>
+        </div>
+
+        <div className="relative max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-gray-700 bg-black group animate-float">
+          {/* 
+             NOTE: To make the video work, rename your video file to 'promo.mp4' 
+             and place it in the 'public' folder of your project.
+          */}
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls
+            poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+          >
+            <source src="/promo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Subtle overlay gradient at the bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const ContactForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -357,6 +404,9 @@ export default function App() {
         <div className="absolute top-1/4 left-10 w-64 h-64 bg-meta-orange/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
         <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-meta-green/10 rounded-full blur-3xl -z-10"></div>
       </section>
+
+      {/* Video Showcase Section */}
+      <VideoShowcase />
 
       {/* Services Section */}
       <section id="services" className="py-24 bg-white">
